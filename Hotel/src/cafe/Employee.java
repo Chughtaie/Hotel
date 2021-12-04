@@ -9,21 +9,13 @@ public class Employee extends Person {
 	private Date join_date;
 	
 
-	
-	public Employee(String name, int age, String address, String cnic, String emp_code, String post, Date join_date) {
-		super(name, age, address, cnic);
-		this.emp_code = emp_code;
-		this.post = post;
-		this.join_date = join_date;
-	}
-	
-	public Employee(String name, String cnic, String emp_code, String post, Date join_date) {
-		super(name, cnic);
-		this.emp_code = emp_code;
-		this.post = post;
-		this.join_date = join_date;
-	}
 
+	public Employee(String name, int age, String address, String cnic, String phone, String emp_code, String post) {
+		super(name, age, address, cnic, phone);
+		this.emp_code = emp_code;
+		this.post = post;
+		this.join_date = new Date();
+	}
 	
 	public String getEmp_code() {
 		return emp_code;
@@ -42,8 +34,6 @@ public class Employee extends Person {
 	}
 	public void setJoin_date(Date join_date) {
 		this.join_date = join_date;
-	}
-
-	
+	}	
 	
 }

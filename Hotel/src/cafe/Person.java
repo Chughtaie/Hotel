@@ -6,30 +6,25 @@ public class Person {
 	private int age;
 	private String address;
 	private String cnic;
-	
+	private String phone;
 
 
 	
-	
-	public Person(String name, int age, String address, String cnic) {
+	public Person(String name, String phone) {
+		super();
+		this.name = name;
+		this.phone = phone;
+	}
+
+	public Person(String name, int age, String address, String cnic, String phone) {
+		super();
 		this.name = name;
 		this.age = age;
 		this.address = address;
-		this.setCnic(cnic);
+		this.cnic = cnic;
+		this.phone = phone;
 	}
 	
-	
-	public Person(String name, String cnic) {
-		this.name = name;
-		this.setCnic(cnic);
-	}
-	
-	public Person(String name) {
-		super();
-		this.name = name;
-	}
-
-
 	public String getName() {
 		return name;
 	}
@@ -57,6 +52,16 @@ public class Person {
 
 	public void setCnic(String cnic) {
 		this.cnic = cnic;
+	}
+
+
+	public String getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 }
