@@ -6,9 +6,11 @@ public class Booking {
 
 	private Vector<Table> table;
 	
-	Booking(){		
-		for(int i=0;i<20;i++)
-			table.add(new Table(i+1,false));		
+	public void populate(Table table){	
+		if(table!=null) this.table.add(table);
+		else 
+			for(int i=0;i<20;i++)
+				this.table.add(new Table(i+1,false));		
 	}
 	
 	public Table book() {

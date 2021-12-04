@@ -13,12 +13,11 @@ public class Order {
 	
 	
 	
-	public Order(int order_id, boolean status, Table table_no, Dictionary<Item, Integer> item, float price) {
+	public Order(int order_id, boolean status, Table table_no, float price) {
 		super();
 		this.order_id = order_id;
 		this.status = status;
 		this.table = table_no;
-		this.item = item;
 		this.total_price = price;
 	}
 	
@@ -46,7 +45,9 @@ public class Order {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
+	public void addItem(Item item,Integer quantity) {
+		this.item.put(item, quantity);
+	}
 
 	
 }
