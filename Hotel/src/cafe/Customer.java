@@ -2,15 +2,19 @@ package cafe;
 
 public class Customer extends Person {
 
+	private String cid;
 	private Table table;
 	private String password;
+	private int total_orders;
 	
 
 
-	public Customer(String name, int age, String address, String cnic, String phone,String password) {
+	public Customer(String name, int age, String address, String cnic, String phone,String password,String cid) {
 		super(name, age, address, cnic, phone);
 		//this.table = table;
 		this.password = password;
+		this.setCid(cid);
+		total_orders=0;
 	}
 	
 	public Customer(String name, String phone,String password) {
@@ -32,6 +36,14 @@ public class Customer extends Person {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getCid() {
+		return cid;
+	}
+
+	public void setCid(String cid) {
+		this.cid = cid;
 	}
 	
 }

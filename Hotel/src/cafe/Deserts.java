@@ -2,7 +2,7 @@ package cafe;
 
 public class Deserts extends Menu{
 
-	public Deserts( String num) {
+	public Deserts( int num) {
 		super("Deserts", num);
 		// TODO Auto-generated constructor stub
 	}

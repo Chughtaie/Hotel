@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Employee extends Person {
 
-	private String emp_code;
+	private String emp_id;
 	private String post;
 	private Date join_date;
 	
@@ -12,16 +12,16 @@ public class Employee extends Person {
 
 	public Employee(String name, int age, String address, String cnic, String phone, String emp_code, String post) {
 		super(name, age, address, cnic, phone);
-		this.emp_code = emp_code;
+		this.emp_id = emp_code;
 		this.post = post;
 		this.join_date = new Date();
 	}
 	
 	public String getEmp_code() {
-		return emp_code;
+		return emp_id;
 	}
 	public void setEmp_code(String emp_code) {
-		this.emp_code = emp_code;
+		this.emp_id = emp_code;
 	}
 	public String getPost() {
 		return post;

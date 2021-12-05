@@ -5,12 +5,12 @@ import java.util.Vector;
 public class Menu {
 
 	private String name;
-	private String num;
+	private int num;
 	private Vector<Item> items;
 	
 	
 	
-	public Menu(String name, String num) {
+	public Menu(String name, int num) {
 		super();
 		this.name = name;
 		this.num = num;
@@ -22,10 +22,10 @@ public class Menu {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getNum() {
+	public int getNum() {
 		return num;
 	}
-	public void setNum(String num) {
+	public void setNum(int num) {
 		this.num = num;
 	}
 	public Vector<Item> getItems() {
@@ -41,8 +41,8 @@ public class Menu {
 	public boolean delItem(Item item) {
 		return items.remove(item);
 	}
-	public void show() {
+	public void displayMenu() {
 		for(Item i : items)
-			i.show();
+			i.displayItem();
 	}
 }

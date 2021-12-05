@@ -3,6 +3,7 @@ package cafe;
 public class Database {
 
 	public boolean addCustomer(Customer customer){	// Add in Oracle (true=ok , false=already exist/Invalid User)
+
 		return true;
 	}
 	
@@ -10,4 +11,20 @@ public class Database {
 
 		return 1;
 	}
+
+	public int addOrder(Order order) {
+		
+		return 1;
+	}
+	
+	public int getPrice(String item_code, String size) {
+
+		return 0;
+	}
+	
+	public int cancelOrder(int order_id) {
+		
+		return 1;
+	}
+
 }

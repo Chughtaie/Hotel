@@ -45,7 +45,7 @@ public class Item {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public void show() {
+	public void displayItem() {
 		for(Map.Entry<String, Integer> e : size.entrySet() )
 			System.out.println(code + "\t" + name + "(" + description + ")\t" + e.getKey()+": "+e.getValue());
 	}

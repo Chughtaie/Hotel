@@ -1,5 +1,6 @@
 package cafe;
 
+import java.util.Timer;
 import java.util.Vector;
 
 public class Booking {
@@ -27,7 +28,7 @@ public class Booking {
 	}
 	
 	public Table book(int no) {
-		
+		Timer time = new Timer();
 		for( Table i : table){
 			if(i.getTable_no()==no && !(i.isStatus()))
 			{
