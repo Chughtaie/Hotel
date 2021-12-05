@@ -22,6 +22,12 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+		//launch(args);
+		
+		Item item = new Item("Chicken Cheese Burger","254","cheese,special sauce,bun,chicken,tomato slice");
+		item.addSize("small",new Integer(355));
+		item.addSize("large",new Integer(500));		
+		item.show();
+		
 	}
 }
