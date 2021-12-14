@@ -1,9 +1,16 @@
 package cafe;
 
+import java.io.IOException;
 import java.util.Vector;
 
+import cafe.App6;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class Handler {
 	
@@ -14,6 +21,10 @@ public class Handler {
 	
 	@FXML
 	private AnchorPane CAFE;
+	@FXML
+	private Button loginCust;
+	@FXML
+	private Button loginCash;
 	
 	@FXML
 	public void Init() {
@@ -23,17 +34,39 @@ public class Handler {
 	}
 	
 	@FXML
-	public void login() {	// 1	Main Page
-		int select = db.readCustomer("0333456", "Newpassword123");
-		
-		if(select==1)
-		{
-			// 3	Load Menu Page and populate Data from file
-		}
-		else if(select==4)
-		{
-			// 4	Admin Page
-		}
+	public void openCashier(ActionEvent event) throws IOException {
+	
+		Parent window;
+	    window = FXMLLoader.load(getClass().getResource("loginCashier.fxml"));
+	    Stage mainStage;
+	    //mainStage = (Stage)  ((Node)event.getSource()).getScene().getWindow();
+	    mainStage = App6.pStage;
+	    mainStage.getScene().setRoot(window); //we dont need to change whole sceene, only set new root.
+	    
+	}
+	
+	
+	@FXML
+	public void openCustomer(ActionEvent event) throws IOException {
+	
+		Parent window;
+	    window = FXMLLoader.load(getClass().getResource("loginCustomer.fxml"));
+	    Stage mainStage;
+	    //mainStage = (Stage)  ((Node)event.getSource()).getScene().getWindow();
+	    mainStage = App6.pStage;
+	    mainStage.getScene().setRoot(window); //we dont need to change whole sceene, only set new root.
+	    
+	}
+	
+	
+	@FXML
+	public void loginCustomer() {	// 1	Main Page
+		//int select = db.readCustomer("0333456", "Newpassword123");
+
+	}
+	
+	@FXML
+	public void loginCashier() {	// 1	Main Page
 	}
 	
 	@FXML
@@ -55,6 +88,9 @@ public class Handler {
 		
 		
 	}
+	
+	
+
 	
 	@FXML
 	public void placeOrder() {	// 3	On Menu Page
