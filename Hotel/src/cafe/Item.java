@@ -3,9 +3,13 @@ package cafe;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+@Entity
 public class Item {
 
 	private String name;
+	@Column(nullable=false)
 	private String code;
 	private Map<String,Integer> size;	//small 300 (Rs)
 	private String description;

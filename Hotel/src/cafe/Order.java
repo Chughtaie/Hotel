@@ -1,15 +1,25 @@
 package cafe;
 
-import java.util.Dictionary;
 import java.util.Vector;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Order {
-	
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int order_id;
 	private boolean status;
 	private Table table;
+	private int total_price;
+	private String cid;
 	//Dictionary<Item, Integer> item;
 	Vector<OrderItem> order;
+	
+	
 	public Vector<OrderItem> getOrder() {
 		return order;
 	}
@@ -17,8 +27,7 @@ public class Order {
 	public void setOrder(Vector<OrderItem> order) {
 		this.order = order;
 	}
-	private int total_price;
-	private String cid;
+
 	
 	
 	
@@ -78,13 +87,14 @@ public class Order {
 		}
 		return false;
 	}
-	public int addOrderItem(OrderItem order) {
+	public void addOrderItem(OrderItem order) {
 		this.order.add(order);
-		return calculateTotal(order.getPrice());
+//		return calculateTotal(order.getPrice());
 	}
-	public int calculateTotal(int price) {
-		total_price += price;
-		return total_price;
+	public void calculateTotal() {
+		total_price = 0;
+		for(OrderItem i:order)
+			total_price += i.getPrice()*i.getQuantity();
 	}
 
 

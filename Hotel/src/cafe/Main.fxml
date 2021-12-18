@@ -12,12 +12,13 @@
       <Button layoutX="194.0" layoutY="358.0" mnemonicParsing="false" onAction="#loginUser" text="Login" />
       <ChoiceBox fx:id="entity" layoutX="136.0" layoutY="170.0" prefWidth="150.0" />
       <Label layoutX="65.0" layoutY="182.0" text="Entity" />
-      <Button layoutX="350.0" layoutY="358.0" mnemonicParsing="false" text="SignUp" />
+      <Button layoutX="350.0" layoutY="358.0" mnemonicParsing="false" onAction="#openSignUp" text="SignUp" />
       <TextField fx:id="identity" layoutX="136.0" layoutY="63.0" />
       <Label layoutX="65.0" layoutY="122.0" text="Password" />
       <Label layoutX="65.0" layoutY="67.0" text="Identity" />
       <TextField fx:id="password" layoutX="136.0" layoutY="118.0" />
       <CheckBox layoutX="305.0" layoutY="174.0" mnemonicParsing="false" onAction="#populateEntity" text="Populate Entity" />
       <Label fx:id="error" layoutX="189.0" layoutY="241.0" text="Label" />
+      <CheckBox layoutX="29.0" layoutY="375.0" mnemonicParsing="false" onAction="#Init" />
    </children>
 </AnchorPane>

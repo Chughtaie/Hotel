@@ -24,13 +24,14 @@ import javafx.stage.Stage;
 public class Handler {
 
 	Database db;
-	Booking book;
-	Cashier cash;
-	Waiter wait;
+	//Cashier cash;
+	//Waiter wait;
 	static Menu menu;
 	static Order order;
 	static Customer cust;
-
+	static Booking book;
+	
+	
 	@FXML
 	private AnchorPane CAFE;
 	@FXML
@@ -48,16 +49,17 @@ public class Handler {
 	@FXML
 	private Label error;
 	@FXML
+	private Label error1;
+	@FXML
 	private ListView<String> list;
 	@FXML
 	private ListView<String> list1;
-
-
-
+	
 	
 	@FXML
 	public void Init() {
 		db = new Database();
+		book  = new Booking(20);
 		// cash = new Cashier("name", 20, "address", "35202-344", "0337654678",
 		// "code_567");
 		// wait = new Waiter("name12", 25, "address", "35202-656", "033763434",
@@ -65,22 +67,10 @@ public class Handler {
 	}
 
 	@FXML
-	public void populateOrder() {
-		if (order.order.isEmpty()) {
-			error.setText("No Items selected");
-			return;
-		}
-		if (!list.getItems().isEmpty()) {
-			list.getItems().clear();
-			return;
-		}
-
-		list.getItems().add("Code\t" + "Size\t" + "Quantity\t" + "Price");
-		for (OrderItem i : order.getOrder())
-			list.getItems().add(i.getItemCode() + "\t" + i.getSize() + "\t" + i.getQuantity() + "\t" + i.getPrice());
-
+	public void confirmOrder() {
+		//order.confirm
 	}
-
+	
 	@FXML
 	public void addItem() throws IOException {
 		if (cb2.getValue() == null) {
@@ -100,6 +90,67 @@ public class Handler {
 		// phone.clear();
 
 		openPage("Menu");
+	}
+	
+	@FXML
+	public void payInvoice() throws IOException {
+		if(cb2.getValue()==null )
+		{	error1.setText("Select a Payment Type"); return;	}
+		if(entity.getValue()==null )
+		{	error1.setText("Select a Table"); return;	}
+		
+		cust.setTable(book.book(Integer.parseInt(entity.getValue().toString())).getTable_no());
+		
+		if(cb2.getValue().toString().equals("Cash"))
+			System.out.println("Go to Counter");
+		else {
+			if(name.getText().isBlank() || password.getText().isBlank())
+				{error1.setText("Enter card details"); return;}
+			else if(password.getText().toString().equals("123"))
+				System.out.println("Order Confirmed");
+				order.setStatus(true);
+				
+		}
+		//order.save
+		openPage("Main");
+	}
+	
+	@FXML
+	public void populateTotalPrice() {
+		if (order.order.isEmpty()) {
+			error.setText("No Items selected");
+			return;
+		}
+		order.calculateTotal();
+		error.setText(Float.toString(order.getPrice()));
+		
+		if(cb2.getItems().isEmpty()) {
+		cb2.getItems().add("Cash");
+		cb2.getItems().add("Card");
+		}
+		if(entity.getItems().isEmpty()) {
+			for(Table i:book.getTable())
+				if(!i.isStatus())
+					//System.out.println(i.getTable_no());
+					entity.getItems().add(Integer.toString(i.getTable_no()));					
+		}
+	}
+	
+	@FXML
+	public void populateOrder() {
+		if (order.order.isEmpty()) {
+			error.setText("No Items selected");
+			return;
+		}
+		if (!list.getItems().isEmpty()) {
+			list.getItems().clear();
+			return;
+		}
+
+		list.getItems().add("Code\t" + "Size\t" + "Quantity\t" + "Price");
+		for (OrderItem i : order.getOrder())
+			list.getItems().add(i.getItemCode() + "\t" + i.getSize() + "\t" + i.getQuantity() + "\t" + i.getPrice());
+
 	}
 
 	@FXML
@@ -153,17 +204,6 @@ public class Handler {
 	}
 
 	@FXML
-	public void openMenu() throws IOException {
-		if (entity.getValue() == null) {
-			error.setText("Select a Damn Menu!!");
-			return;
-		}
-		openPage("Menu");
-
-		// if(entity.getValue().toString())
-	}
-
-	@FXML
 	public void populateEntity() {
 		if (!entity.getItems().isEmpty()) {
 			entity.getItems().clear();
@@ -172,7 +212,7 @@ public class Handler {
 
 		Vector<String> type = new Vector<String>();
 		type.add("Customer");
-		type.add("Cashier");
+		type.add("Manager");
 
 		entity.getItems().addAll(type);
 	}
@@ -203,13 +243,14 @@ public class Handler {
 		}
 
 		String type = entity.getValue().toString();
-		// cust = db.readCustomer(identity.getText().toString());
-		cust = new Customer("abdullah", "4656456", "f4cc", "4343");
+		db = new Database();
+		 cust = db.readCustomer(identity.getText());
+		//cust = new Customer("abdullah", "4656456", "f4cc", "4343");
 
-		String pass = "lol";// cust.getPassword;
+		String pass = cust.getPassword();
 		if (pass.equals(password.getText().toString()))
-			if (type.equals("Cashier"))
-				openPage("loginCashier");
+			if (type.equals("Manager"))
+				openPage("Manager");
 			else
 				{
 				order = new Order(1, false, new Table(1, false), cust.getCid());				
@@ -226,10 +267,13 @@ public class Handler {
 			return;
 		}
 
-		cust = new Customer(name.getText(), phone.getText(), password.getText(), identity.getText());
-		order = new Order(1, false, new Table(1, false), cust.getCid());		
-		openPage("selectMenu");
+		cust = new Customer(name.getText(), phone.getText(), password.getText(),identity.getText());
+		db=new Database();
 		db.addCustomer(cust);
+		//order = new Order(1, false, new Table(1, false), cust.getCid());		
+
+		//openPage("selectMenu");
+		
 	}
 
 	@FXML
@@ -299,6 +343,22 @@ public class Handler {
 		openPage("Order");
 	}
 
+	@FXML
+	public void openCheck() throws IOException {
+		openPage("Check");
+	}
+
+	@FXML
+	public void openMenu() throws IOException {
+
+		if (entity.getValue() == null) {
+			error.setText("Select a Damn Menu!!");
+			return;
+		}
+		openPage("Menu");
+
+		// if(entity.getValue().toString())
+	}
 
 }
 

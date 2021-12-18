@@ -5,13 +5,24 @@ import java.util.Vector;
 
 public class Booking {
 
+	/**
+	 * 
+	 */
 	private Vector<Table> table;
-	
-	public void populate(Table table){	
-		if(table!=null) this.table.add(table);
-		else 
-			for(int i=0;i<20;i++)
+
+	Booking(int books){
+		if(table!=null) return;//this.table.add(new table());
+		table=new Vector<Table>();
+			for(int i=0;i<books;i++)
 				this.table.add(new Table(i+1,false));		
+		
+	}
+	public Vector<Table> getTable() {
+		return table;
+	}
+
+	public void setTable(Vector<Table> table) {
+		this.table = table;
 	}
 	
 	public Table book() {

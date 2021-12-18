@@ -1,14 +1,20 @@
 package cafe;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class Person {
 
 	private String name;
+	@Column(nullable=true)
 	private int age;
 	private String address;
 	private String cnic;
 	private String phone;
 
-
+Person(){}
 	
 	public Person(String name, String phone) {
 		super();

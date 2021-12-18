@@ -1,16 +1,25 @@
 package cafe;
 
-/**
- * @author Mr.Chughtai
- *
- */
-/**
- * @author Mr.Chughtai
- *
- */
-public class OrderItem {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+/**
+ * @author Mr.Chughtai
+ *
+ */
+/**
+ * @author Mr.Chughtai
+ *
+ */
+@Entity
+public class OrderItem {
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int id;
+	@Column(nullable=false)
 	private String itemCode;
 	private String size;
 	private int quantity;
@@ -45,7 +54,7 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 	public int getPrice() {
-		return price*quantity;
+		return price;
 	}
 	public void setPrice(int price) {
 		this.price = price;
