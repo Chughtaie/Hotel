@@ -10,6 +10,13 @@ public class Order {
 	private Table table;
 	//Dictionary<Item, Integer> item;
 	Vector<OrderItem> order;
+	public Vector<OrderItem> getOrder() {
+		return order;
+	}
+
+	public void setOrder(Vector<OrderItem> order) {
+		this.order = order;
+	}
 	private int total_price;
 	private String cid;
 	
@@ -22,6 +29,7 @@ public class Order {
 		this.table = table_no;
 		this.total_price = 0;
 		this.setCid(cid);
+		order = new Vector<OrderItem>();
 	}
 	
 	public int getOrder_id() {

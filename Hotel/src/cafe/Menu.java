@@ -6,7 +6,7 @@ public class Menu {
 
 	private String name;
 	private int num;
-	private Vector<Item> items;
+	private Vector<Item> items=null;
 	
 	
 	
@@ -36,6 +36,8 @@ public class Menu {
 	}
 	
 	public boolean addItem(Item item) {
+		if(items==null)
+			items= new Vector<Item>();		
 		return items.add(item);
 	}
 	public boolean delItem(Item item) {

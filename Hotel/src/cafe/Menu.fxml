@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="CAFE" prefHeight="446.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cafe.Handler">
+   <children>
+      <ListView fx:id="list" layoutX="18.0" layoutY="136.0" prefHeight="310.0" prefWidth="244.0" />
+      <ChoiceBox fx:id="entity" layoutX="16.0" layoutY="32.0" prefHeight="25.0" prefWidth="109.0" />
+      <Label fx:id="error" layoutX="277.0" layoutY="20.0" text="Label" />
+      <ListView fx:id="list1" layoutX="262.0" layoutY="136.0" prefHeight="310.0" prefWidth="179.0" />
+      <ChoiceBox fx:id="cb2" layoutX="16.0" layoutY="69.0" prefHeight="25.0" prefWidth="109.0" />
+      <CheckBox layoutX="138.0" layoutY="36.0" mnemonicParsing="false" onAction="#populateMenuItems" text="Menu" />
+      <CheckBox layoutX="140.0" layoutY="73.0" mnemonicParsing="false" onAction="#populateSize" text="Sizes" />
+      <TextField fx:id="phone" layoutX="18.0" layoutY="107.0" prefHeight="25.0" prefWidth="109.0" />
+      <Label layoutX="140.0" layoutY="111.0" text="Quantity" />
+      <Button layoutX="358.0" layoutY="107.0" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="80.0" text="Add Item" />
+      <Button layoutX="358.0" layoutY="69.0" mnemonicParsing="false" onAction="#openOrderItems" prefHeight="25.0" prefWidth="80.0" text="Show Order" />
+   </children>
+</AnchorPane>

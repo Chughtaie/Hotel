@@ -17,10 +17,11 @@ public class Customer extends Person {
 		total_orders=0;
 	}
 	
-	public Customer(String name, String phone,String password) {
+	public Customer(String name, String phone,String password,String cid) {
 		super(name, phone);
 		//this.table = table;
 		this.password = password;
+		this.cid = cid;
 	}
 
 	public Table getTable() {

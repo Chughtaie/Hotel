@@ -16,7 +16,7 @@ public class OrderItem {
 	private int quantity;
 	private int price;
 	
-	public OrderItem(String itemCode, String size, int quantity, int price,int id) {
+	public OrderItem(int id,String itemCode, String size, int quantity, int price) {
 		super();
 		this.itemCode = itemCode;
 		this.size = size;
@@ -59,5 +59,7 @@ public class OrderItem {
 		this.id = id;
 	}
 	
-	
+	public void display() {
+		System.out.println(itemCode+"\t"+size+"\t"+quantity+"\t"+price);
+	}
 }

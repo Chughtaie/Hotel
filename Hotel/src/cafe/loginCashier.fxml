@@ -6,8 +6,8 @@
 
 <AnchorPane fx:id="CAFE" prefHeight="481.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cafe.Handler">
    <children>
-      <Button layoutX="68.0" layoutY="359.0" mnemonicParsing="false" onAction="#login" text="Customer" />
-      <Button layoutX="306.0" layoutY="372.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="68.0" text="Cashier" />
+      <Button layoutX="218.0" layoutY="371.0" mnemonicParsing="false" onAction="#loginUser" prefHeight="25.0" prefWidth="68.0" text="Cashier" />
       <Label layoutX="190.0" layoutY="52.0" text="Cashier" />
+      <Button layoutX="387.0" layoutY="371.0" mnemonicParsing="false" onAction="#openMain" text="Back" />
    </children>
 </AnchorPane>
