@@ -7,16 +7,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Vector;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
-
-
-
 
 public class Database {
 	
@@ -31,6 +31,16 @@ public class Database {
 			session.save(customer);
 			trans.commit();
 	}
+	public void updateCustomer(Customer customer) {
+	  	Configuration con = new Configuration();
+        con.configure().addAnnotatedClass(Customer.class);
+        SessionFactory sf= con.buildSessionFactory();
+        Session session= sf.openSession();
+        Transaction trans= session.beginTransaction();
+        
+		session.update(customer);
+		trans.commit();
+}
 
 	public Customer readCustomer(String identity) {
 	  	Configuration con = new Configuration();
@@ -44,20 +54,122 @@ public class Database {
 		trans.commit();
 		return customer;
 	}
+
+	public Employee readEmployee(String identity) {
+	  	Configuration con = new Configuration();
+        con.configure().addAnnotatedClass(Employee.class);
+        SessionFactory sf= con.buildSessionFactory();
+        Session session= sf.openSession();
+        Transaction trans= session.beginTransaction();
+        
+		Employee emp = session.get(Employee.class,identity);
+		System.out.println(emp.getName());
+		trans.commit();
+		return emp;
+	}
+
+	public void addEmployee(Employee emp) {
+	  	Configuration con = new Configuration();
+        con.configure().addAnnotatedClass(Employee.class);
+        SessionFactory sf= con.buildSessionFactory();
+        Session session= sf.openSession();
+        Transaction trans= session.beginTransaction();
+        
+        session.save(emp);
+		trans.commit();
+
+	}
 	
-	// public Customer readdCustomer(String identity) throws SQLException {
-		//ResultSet rs = read("select * from Customer where identity = '" + identity + "')");
-		//Customer cust = new Customer(rs.getString("name"),rs.getString("phone"),rs.getString("password"),rs.getString("cid"));
-	//	return cust;
-	//}
+	public void addItem(Item item) {
+	  	Configuration con = new Configuration();
+        con.configure().addAnnotatedClass(Item.class);
+        SessionFactory sf= con.buildSessionFactory();
+        Session session= sf.openSession();
+        Transaction trans= session.beginTransaction();
+        
+		session.save(item);
+		trans.commit();
+	}
+	public void updateItem(Item item) {
+	  	Configuration con = new Configuration();
+        con.configure().addAnnotatedClass(Item.class);
+        SessionFactory sf= con.buildSessionFactory();
+        Session session= sf.openSession();
+        Transaction trans= session.beginTransaction();
+        
+		session.update(item);
+		trans.commit();
+	}
 	
-	public boolean adddCustomer(Customer customer) throws IOException, SQLException{	// Add in Oracle (true=ok , false=already exist/Invalid User)
+	public Item getItem(int id) {
+	  	Configuration con = new Configuration();
+        con.configure().addAnnotatedClass(Item.class);
+        SessionFactory sf= con.buildSessionFactory();
+        Session session= sf.openSession();
+        Transaction trans= session.beginTransaction();
+        
+		Item item = session.get(Item.class,id);
+		trans.commit();
+		return item;
+	}
 	
-		String query = "insert into Customer(name,phone,password,cid) values('" + customer.getName() + "'," + customer.getPhone() +"," +
-					customer.getPassword() +",'" + customer.getCid() + "')";
-			add(query);
-			
-		return true;
+	public List<Item> getAllItem() {
+	  	Configuration con = new Configuration();
+        con.configure().addAnnotatedClass(Item.class);
+        SessionFactory sf= con.buildSessionFactory();
+        Session session= sf.openSession();
+        Transaction trans= session.beginTransaction();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+
+        // Create CriteriaQuery
+        CriteriaQuery<Item> criteria = builder.createQuery(Item.class);
+
+        // Specify criteria root
+        criteria.from(Item.class);
+
+        // Execute query
+        List<Item> itemList = session.createQuery(criteria).getResultList();
+
+        
+		//Item item = session.get(Item.class,id);
+		trans.commit();
+		return itemList;
+	}
+
+	public void addOrderItem(OrderItem orderitem) {
+	  	Configuration con = new Configuration();
+        con.configure().addAnnotatedClass(OrderItem.class);
+        SessionFactory sf= con.buildSessionFactory();
+        Session session= sf.openSession();
+        Transaction trans= session.beginTransaction();
+        
+		session.save(orderitem);
+		trans.commit();
+	}
+
+	public void addOrder(Order order) {
+	  	Configuration con = new Configuration();
+        con.configure().addAnnotatedClass(Order.class);
+        SessionFactory sf= con.buildSessionFactory();
+        Session session= sf.openSession();
+        Transaction trans= session.beginTransaction();
+        
+		session.save(order);
+		trans.commit();
+	}
+	
+	
+	public void deleteOrder(int order) {
+	  	Configuration con = new Configuration();
+        con.configure().addAnnotatedClass(Order.class);
+        SessionFactory sf= con.buildSessionFactory();
+        Session session= sf.openSession();
+        Transaction trans= session.beginTransaction();
+        
+		Order ord = session.get(Order.class,order);
+		session.delete(ord);
+		trans.commit();
 	}
 	
 	public void add(String query)throws IOException, SQLException {

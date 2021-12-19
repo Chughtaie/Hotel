@@ -12,14 +12,14 @@
    <children>
       <ListView fx:id="list" layoutX="18.0" layoutY="136.0" prefHeight="310.0" prefWidth="244.0" />
       <ChoiceBox fx:id="entity" layoutX="16.0" layoutY="32.0" prefHeight="25.0" prefWidth="109.0" />
-      <Label fx:id="error" layoutX="277.0" layoutY="20.0" text="Label" />
+      <Label fx:id="error" layoutX="200.0" layoutY="111.0" />
       <ListView fx:id="list1" layoutX="262.0" layoutY="136.0" prefHeight="310.0" prefWidth="179.0" />
-      <ChoiceBox fx:id="cb2" layoutX="16.0" layoutY="69.0" prefHeight="25.0" prefWidth="109.0" />
       <CheckBox layoutX="138.0" layoutY="36.0" mnemonicParsing="false" onAction="#populateMenuItems" text="Menu" />
-      <CheckBox layoutX="140.0" layoutY="73.0" mnemonicParsing="false" onAction="#populateSize" text="Sizes" />
-      <TextField fx:id="phone" layoutX="18.0" layoutY="107.0" prefHeight="25.0" prefWidth="109.0" />
-      <Label layoutX="140.0" layoutY="111.0" text="Quantity" />
+      <TextField fx:id="phone" layoutX="18.0" layoutY="82.0" prefHeight="25.0" prefWidth="109.0" />
+      <Label layoutX="141.0" layoutY="86.0" text="Quantity" />
       <Button layoutX="358.0" layoutY="107.0" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="80.0" text="Add Item" />
       <Button layoutX="358.0" layoutY="69.0" mnemonicParsing="false" onAction="#openOrderItems" prefHeight="25.0" prefWidth="80.0" text="Show Order" />
+      <Label fx:id="error1" layoutX="338.0" layoutY="36.0" />
+      <Label layoutX="226.0" layoutY="37.0" text="Running Item" />
    </children>
 </AnchorPane>

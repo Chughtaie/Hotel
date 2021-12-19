@@ -13,22 +13,25 @@ public class Person {
 	private String address;
 	private String cnic;
 	private String phone;
+	private String password;
 
-Person(){}
+Person(){ }
 	
-	public Person(String name, String phone) {
+	public Person(String name, String phone,String password) {
 		super();
 		this.name = name;
 		this.phone = phone;
+		this.password = password;
 	}
 
-	public Person(String name, int age, String address, String cnic, String phone) {
+	public Person(String name, int age, String address, String cnic, String phone,String password) {
 		super();
 		this.name = name;
 		this.age = age;
 		this.address = address;
 		this.cnic = cnic;
 		this.phone = phone;
+		this.password = password;
 	}
 	
 	public String getName() {
@@ -68,6 +71,14 @@ Person(){}
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

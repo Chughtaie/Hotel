@@ -8,26 +8,26 @@ import javax.persistence.Id;
 @Entity
 public class Customer extends Person {
 	@Id
-	//@GeneratedValue (strategy = GenerationType.IDENTITY)
+	//	
 	private String cid;
 	private int tablee;
-	private String password;
+//	private String password;
 	private int total_orders;
 	
 	Customer(){ }
 	
 	public Customer(String name, int age, String address, String cnic, String phone,String password,String cid) {
-		super(name, age, address, cnic, phone);
+		super(name, age, address, cnic, phone,password);
 		//this.table = table;
-		this.password = password;
+		this.setPassword(password);
 		this.setCid(cid);
 		setTotal_orders(0);
 	}
 	
 	public Customer(String name, String phone,String password,String cid) {
-		super(name, phone);
+		super(name, phone,password);
 		//this.table = table;
-		this.password = password;
+		//this.setPassword(password);
 		this.cid = cid;
 	}
 
@@ -36,14 +36,6 @@ public class Customer extends Person {
 	}
 	public void setTable(int table) {
 		this.tablee = table;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getCid() {

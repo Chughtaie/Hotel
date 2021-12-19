@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="CAFE" prefHeight="446.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cafe.Handler">
@@ -13,5 +14,8 @@
       <Button layoutX="350.0" layoutY="358.0" mnemonicParsing="false" onAction="#openMenu" text="Next" />
       <CheckBox layoutX="304.0" layoutY="66.0" mnemonicParsing="false" onAction="#populateMenu" text="PopulateMenu" />
       <Label fx:id="error" layoutX="166.0" layoutY="123.0" text="Label" />
+      <Button layoutX="311.0" layoutY="170.0" mnemonicParsing="false" onAction="#CancelOrder" text="Cancel Order" />
+      <TextField fx:id="phone" layoutX="120.0" layoutY="170.0" />
+      <Label layoutX="61.0" layoutY="174.0" text="Order No" />
    </children>
 </AnchorPane>

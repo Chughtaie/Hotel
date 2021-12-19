@@ -12,7 +12,7 @@ public class Table {
 	private int table_no;
 	private boolean status;
 	
-
+Table(){ status = false;}
 	public Table(int table_no, boolean status) {
 		super();
 		this.table_no = table_no;

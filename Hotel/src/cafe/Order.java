@@ -6,20 +6,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Ordera")
 public class Order {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int order_id;
 	private boolean status;
-	private Table table;
+	private int tablee;
 	private int total_price;
 	private String cid;
 	//Dictionary<Item, Integer> item;
+	//@OneToMany
+	@Transient
 	Vector<OrderItem> order;
 	
-	
+	Order(){}
 	public Vector<OrderItem> getOrder() {
 		return order;
 	}
@@ -30,12 +36,11 @@ public class Order {
 
 	
 	
-	
-	public Order(int order_id, boolean status, Table table_no,String cid) {
+	 
+	public Order( boolean status, int table_no,String cid) {
 		super();
-		this.order_id = order_id;
 		this.status = status;
-		this.table = table_no;
+		this.tablee = table_no;
 		this.total_price = 0;
 		this.setCid(cid);
 		order = new Vector<OrderItem>();
@@ -53,11 +58,11 @@ public class Order {
 	public void setPrice(int price) {
 		this.total_price = price;
 	}
-	public Table getTable_no() {
-		return table;
+	public int getTable_no() {
+		return tablee;
 	}
-	public void setTable_no(Table table_no) {
-		this.table = table_no;
+	public void setTable_no(int table_no) {
+		this.tablee = table_no;
 	}
 	public boolean isStatus() {
 		return status;
@@ -94,7 +99,7 @@ public class Order {
 	public void calculateTotal() {
 		total_price = 0;
 		for(OrderItem i:order)
-			total_price += i.getPrice()*i.getQuantity();
+			total_price += i.getItem().getPrice() *i.getQuantity();
 	}
 
 

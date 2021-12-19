@@ -23,14 +23,14 @@ import javafx.stage.Stage;
 
 public class Handler {
 
-	Database db;
+	Database db = new Database();;
 	//Cashier cash;
 	//Waiter wait;
 	static Menu menu;
 	static Order order;
 	static Customer cust;
 	static Booking book;
-	
+	static Person user;
 	
 	@FXML
 	private AnchorPane CAFE;
@@ -47,6 +47,8 @@ public class Handler {
 	@FXML
 	private TextField password;
 	@FXML
+	private TextField price;
+	@FXML
 	private Label error;
 	@FXML
 	private Label error1;
@@ -60,6 +62,9 @@ public class Handler {
 	public void Init() {
 		db = new Database();
 		book  = new Booking(20);
+		db.addOrder(new Order(false,1,"dba"));
+		db.addOrderItem(new OrderItem(1,4,new Item()));
+		//db.addEmployee(new Employee("umer","yts","321","fg3844"));
 		// cash = new Cashier("name", 20, "address", "35202-344", "0337654678",
 		// "code_567");
 		// wait = new Waiter("name12", 25, "address", "35202-656", "033763434",
@@ -68,22 +73,55 @@ public class Handler {
 
 	@FXML
 	public void confirmOrder() {
-		//order.confirm
+		if(price.getText().isBlank())
+		{error.setText("Enter Order Number!!!"); return;}
+		db.addOrder(order);
+
+	}
+	
+	@FXML
+	public void CancelOrder() {
+		if(phone.getText().isBlank())
+		{error.setText("Enter Order Number!!!"); return;}
+		//db.addOrder(order);
+		db.deleteOrder(Integer.parseInt(phone.getText()));
+	}
+	
+	@FXML
+	public void introItem() {
+		
+
+		if (identity.getText().isBlank() || password.getText().isBlank() || name.getText().isBlank()
+				|| phone.getText().isBlank() || price.getText().isBlank() ) {
+			error.setText("Fill all the blanks");
+			return;
+		}
+
+		Item item = new Item(name.getText(), identity.getText(), password.getText());
+		item.addSize(phone.getText(), Integer.parseInt(price.getText()));
+		db = new Database();
+		db.addItem(item);
+		
 	}
 	
 	@FXML
 	public void addItem() throws IOException {
-		if (cb2.getValue() == null) {
+		if (entity.getValue() == null) {
 			error.setText("Select all fields!!");
 			return;
 		}
 
-		String size = cb2.getValue();
-		int index = size.indexOf(" ");
-		int quant = Integer.parseInt(phone.getText().toString());
-		int price = Integer.parseInt(size.substring(index + 1));
-		OrderItem orderItem = new OrderItem(1, entity.getValue(), size.substring(0, index), quant, price);
-		orderItem.display();
+	//	String size = cb2.getValue();
+//		int index = size.indexOf(" ");
+		int quant = Integer.parseInt(phone.getText());
+		int id = Integer.parseInt(entity.getValue());
+		//OrderItem orderItem = new OrderItem( entity.getValue(), size.substring(0, index), quant, price);
+		db = new Database();
+		Item item = db.getItem(id);
+		item.setOtimes(item.getOtimes()+1);
+		db.updateItem(item);
+		OrderItem orderItem = new OrderItem(quant,item);
+		//orderItem.display();
 		order.addOrderItem(orderItem);
 		// cb2.getItems().clear();
 		// entity.getItems().clear();
@@ -100,16 +138,23 @@ public class Handler {
 		{	error1.setText("Select a Table"); return;	}
 		
 		cust.setTable(book.book(Integer.parseInt(entity.getValue().toString())).getTable_no());
-		
+		cust.setTotal_orders(cust.getTotal_orders()+1);
+		db.updateCustomer(cust);
 		if(cb2.getValue().toString().equals("Cash"))
+			{
 			System.out.println("Go to Counter");
+			db.addOrder(order);
+			}
 		else {
 			if(name.getText().isBlank() || password.getText().isBlank())
 				{error1.setText("Enter card details"); return;}
 			else if(password.getText().toString().equals("123"))
-				System.out.println("Order Confirmed");
+				{System.out.println("Order Confirmed");
 				order.setStatus(true);
-				
+				db.addOrder(order);
+				}
+			else 
+			{error1.setText("Invalid Password"); return;}
 		}
 		//order.save
 		openPage("Main");
@@ -121,8 +166,12 @@ public class Handler {
 			error.setText("No Items selected");
 			return;
 		}
+
 		order.calculateTotal();
-		error.setText(Float.toString(order.getPrice()));
+		float total = order.getPrice();
+		if(cust.getTotal_orders()%10==0)
+			total*=0.9;
+		error.setText(Float.toString(total));
 		
 		if(cb2.getItems().isEmpty()) {
 		cb2.getItems().add("Cash");
@@ -149,7 +198,7 @@ public class Handler {
 
 		list.getItems().add("Code\t" + "Size\t" + "Quantity\t" + "Price");
 		for (OrderItem i : order.getOrder())
-			list.getItems().add(i.getItemCode() + "\t" + i.getSize() + "\t" + i.getQuantity() + "\t" + i.getPrice());
+			list.getItems().add(i.getItem().getCode() + "\t" + i.getItem().getSize() + "\t" + i.getQuantity() + "\t" + i.getItem().getPrice());
 
 	}
 
@@ -163,20 +212,34 @@ public class Handler {
 		}
 
 		menu = new Menu(entity.getValue(), 1);
-		Item item = new Item("Karahi", "23", "BUTT KARAHI WITH SPIcE");
-		item.addSize("small", 200);
-		item.addSize("large", 400);
-		Item item2 = new Item("Karahies", "24", "BUTT KARAHI WITH SPIcEs and salad");
-		item2.addSize("medium", 700);
-		System.out.println(menu.addItem(item));
-		menu.addItem(item2);
+//		Item item = new Item("Karahi", "23", "BUTT KARAHI WITH SPIcE","small",200);
+	//	Item item2 = new Item("Chicken", "24", "BUTT KARAHI WITH SPIcEs and salad","large",500);
+
+//		System.out.println(menu.addItem(item));
+		db = new Database();
+		
+
+		Vector<Item> itemss = new Vector<Item>();
+		int j=-1;
+		String name="";
+		for(Item i: db.getAllItem())
+			{
+			itemss.add(i);
+			if(i.getOtimes()>j)
+				{
+				j=i.getOtimes();
+				name = i.getName();
+				}
+			}
+		error1.setText(name);
+		menu.setItems(itemss);
 		// Vector<String> show=new Vector<String>();
 		list.getItems().add("Code" + "\t" + "Name");
 		list1.getItems().add("Description");
 		for (Item i : menu.getItems()) {
 			list.getItems().add(i.getCode() + "\t" + i.getName());
 			list1.getItems().add(i.getDescription());
-			entity.getItems().add(i.getCode());
+			entity.getItems().add(Integer.toString(i.getId()));
 		}
 	}
 
@@ -194,13 +257,13 @@ public class Handler {
 		Vector<String> type = new Vector<String>();
 		// type.add("Customer");
 		// type.add("Cashier");
-		for (Item i : menu.getItems()) {
-			if (i.getCode() == entity.getValue()) {
-				for (Map.Entry<String, Integer> e : i.getSize().entrySet())
-					cb2.getItems().add(e.getKey() + " " + e.getValue());
-				return;
-			}
-		}
+		//for (Item i : menu.getItems()) {
+		//	if (i.getCode() == entity.getValue()) {
+			//	for (Map.Entry<String, Integer> e : i.getSize().entrySet())
+				//	cb2.getItems().add(e.getKey() + " " + e.getValue());
+				//return;
+			//}
+		//}
 	}
 
 	@FXML
@@ -212,7 +275,7 @@ public class Handler {
 
 		Vector<String> type = new Vector<String>();
 		type.add("Customer");
-		type.add("Manager");
+		type.add("Employee");
 
 		entity.getItems().addAll(type);
 	}
@@ -244,16 +307,20 @@ public class Handler {
 
 		String type = entity.getValue().toString();
 		db = new Database();
-		 cust = db.readCustomer(identity.getText());
-		//cust = new Customer("abdullah", "4656456", "f4cc", "4343");
+		if (type.equals("Employee"))			
+			user = db.readEmployee(identity.getText());
+		else	
+			user = db.readCustomer(identity.getText());
 
-		String pass = cust.getPassword();
+		String pass = user.getPassword();
 		if (pass.equals(password.getText().toString()))
-			if (type.equals("Manager"))
-				openPage("Manager");
+
+			if (type.equals("Employee"))			
+				openPage("Employee");
 			else
 				{
-				order = new Order(1, false, new Table(1, false), cust.getCid());				
+				cust = (Customer) user;
+				order = new Order(false, 1, cust.getCid());				
 				openPage("selectMenu");
 				}
 	}
@@ -272,7 +339,7 @@ public class Handler {
 		db.addCustomer(cust);
 		//order = new Order(1, false, new Table(1, false), cust.getCid());		
 
-		//openPage("selectMenu");
+		openPage("selectMenu");
 		
 	}
 
@@ -346,6 +413,11 @@ public class Handler {
 	@FXML
 	public void openCheck() throws IOException {
 		openPage("Check");
+	}
+	
+	@FXML
+	public void openAddItem() throws IOException {
+		openPage("addItem");
 	}
 
 	@FXML
