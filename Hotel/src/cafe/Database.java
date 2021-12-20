@@ -63,7 +63,7 @@ public class Database {
         Transaction trans= session.beginTransaction();
         
 		Employee emp = session.get(Employee.class,identity);
-		System.out.println(emp.getName());
+
 		trans.commit();
 		return emp;
 	}

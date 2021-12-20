@@ -309,13 +309,18 @@ public class Handler {
 			return;
 		}
 
+		
 		String type = entity.getValue().toString();
 		db = new Database();
+		user=null;
 		if (type.equals("Employee"))			
 			user = db.readEmployee(identity.getText());
 		else	
 			user = db.readCustomer(identity.getText());
 
+		if(user==null)
+				throw new UserException();
+		
 		String pass = user.getPassword();
 		if (pass.equals(password.getText().toString()))
 
@@ -327,12 +332,16 @@ public class Handler {
 				order = new Order(false, 1, cust.getCid());				
 				openPage("selectMenu");
 				}
+		else throw new PasswordException();
 	}
 
 	@FXML
-	public void SignUpUser() throws SQLException, IOException { // 1 Main Page
+	public void SignUpUser() throws SQLException, IOException, NameException { // 1 Main Page
 
-		if (identity.getText().isBlank() || password.getText().isBlank() || name.getText().isBlank()
+		if(name.getText().isBlank())
+			throw new NameException();
+		
+		if (identity.getText().isBlank() || password.getText().isBlank()
 				|| phone.getText().isBlank()) {
 			error.setText("Fill all the blanks");
 			return;
