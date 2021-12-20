@@ -86,6 +86,9 @@ public class Order {
 		}
 	}	
 	public boolean removeOrderItem(int id) {
+		if(order==null || order.isEmpty())
+			return false;
+		
 		for(OrderItem i:order) {
 			if(i.getId()==id)
 				return order.remove(i);
@@ -98,8 +101,10 @@ public class Order {
 	}
 	public void calculateTotal() {
 		total_price = 0;
+
 		for(OrderItem i:order)
-			total_price += i.getItem().getPrice() *i.getQuantity();
+			{total_price += i.getItem().getPrice() *i.getQuantity();
+			System.out.println(i.getItem().getPrice());}
 	}
 
 

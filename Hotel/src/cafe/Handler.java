@@ -53,6 +53,8 @@ public class Handler {
 	@FXML
 	private Label error1;
 	@FXML
+	private Label error2;
+	@FXML
 	private ListView<String> list;
 	@FXML
 	private ListView<String> list1;
@@ -169,8 +171,10 @@ public class Handler {
 
 		order.calculateTotal();
 		float total = order.getPrice();
-		if(cust.getTotal_orders()%10==0)
-			total*=0.9;
+		if(cust.getTotal_orders()%5==0)
+			{
+			System.out.println("discounted");
+			total*=0.9; error2.setText("Discounted 10%");}
 		error.setText(Float.toString(total));
 		
 		if(cb2.getItems().isEmpty()) {
@@ -234,10 +238,10 @@ public class Handler {
 		error1.setText(name);
 		menu.setItems(itemss);
 		// Vector<String> show=new Vector<String>();
-		list.getItems().add("Code" + "\t" + "Name");
+		list.getItems().add("Id  Price  Code" + "\t" + "Name");
 		list1.getItems().add("Description");
 		for (Item i : menu.getItems()) {
-			list.getItems().add(i.getCode() + "\t" + i.getName());
+			list.getItems().add(i.getId() +"  "+ i.getPrice()+"      "+i.getCode() + "\t" + i.getName());
 			list1.getItems().add(i.getDescription());
 			entity.getItems().add(Integer.toString(i.getId()));
 		}
@@ -246,7 +250,7 @@ public class Handler {
 	@FXML
 	public void populateSize() {
 		if (entity.getValue() == null) {
-			error.setText("Select a fucking Item");
+			error.setText("Select an Item");
 			return;
 		}
 		if (!cb2.getItems().isEmpty()) {
@@ -288,11 +292,11 @@ public class Handler {
 		}
 
 		Vector<String> type = new Vector<String>();
-		type.add("Desi");
-		type.add("Fast Food");
-		type.add("Chinese");
-		type.add("Desert");
-		type.add("Beverages");
+		type.add("See All Menus");
+		//type.add("Fast Food");
+		//type.add("Chinese");
+		//type.add("Desert");
+		//type.add("Beverages");
 
 		entity.getItems().addAll(type);
 	}
@@ -337,6 +341,7 @@ public class Handler {
 		cust = new Customer(name.getText(), phone.getText(), password.getText(),identity.getText());
 		db=new Database();
 		db.addCustomer(cust);
+		order = new Order(false, 1, cust.getCid());
 		//order = new Order(1, false, new Table(1, false), cust.getCid());		
 
 		openPage("selectMenu");

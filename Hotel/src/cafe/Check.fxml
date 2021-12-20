@@ -10,7 +10,7 @@
 <AnchorPane fx:id="CAFE" prefHeight="446.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cafe.Handler">
    <children>
       <Button layoutX="167.0" layoutY="356.0" mnemonicParsing="false" onAction="#payInvoice" prefHeight="25.0" prefWidth="118.0" text="Pay" textFill="#b92525" />
-      <CheckBox layoutX="228.0" layoutY="76.0" mnemonicParsing="false" onAction="#populateTotalPrice" text="Display Horror" />
+      <CheckBox layoutX="228.0" layoutY="76.0" mnemonicParsing="false" onAction="#populateTotalPrice" text="Display Total" />
       <Label layoutX="58.0" layoutY="76.0" text="Total" />
       <Label fx:id="error" layoutX="139.0" layoutY="76.0" text="Label" />
       <ChoiceBox fx:id="cb2" layoutX="121.0" layoutY="133.0" prefWidth="150.0" />
@@ -22,5 +22,6 @@
       <Label layoutX="58.0" layoutY="227.0" text="Number" />
       <TextField fx:id="name" layoutX="122.0" layoutY="223.0" />
       <ChoiceBox fx:id="entity" layoutX="121.0" layoutY="179.0" prefWidth="150.0" />
+      <Label fx:id="error2" layoutX="122.0" layoutY="42.0" prefHeight="17.0" prefWidth="158.0" />
    </children>
 </AnchorPane>

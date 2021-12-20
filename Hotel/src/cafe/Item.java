@@ -20,7 +20,7 @@ public class Item {
 	private String code;
 	//private Map<String,Integer> size;	//small 300 (Rs)
 	private String size;
-	private Integer price;
+	private int price;
 	private String description;
 	
 	Item(){}
@@ -35,7 +35,7 @@ public class Item {
 		//size = new HashMap<String,Integer>();
 	}
 	
-	public Item(String name, String code, String description, String size, Integer price) {
+	public Item(String name, String code, String description, String size, int price) {
 		super();
 		this.name = name;
 		this.code = code;
@@ -80,10 +80,10 @@ public class Item {
 	public void setSize(String size) {
 		this.size = size;
 	}
-	public Integer getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(Integer price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public void displayItem() {
