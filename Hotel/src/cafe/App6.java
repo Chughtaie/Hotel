@@ -23,7 +23,7 @@ public class App6 extends Application
 		{
 			pStage = primaryStage;
 			Parent root = (Parent)FXMLLoader.load(getClass().getResource("Main.fxml"));
-			Scene scene = new Scene(root,500,500);
+			Scene scene = new Scene(root,450,450);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			pStage.setScene(scene);
 			pStage.setTitle("CAFE");

@@ -5,20 +5,27 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="CAFE" prefHeight="446.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cafe.Handler">
    <children>
-      <Button layoutX="194.0" layoutY="358.0" mnemonicParsing="false" onAction="#loginUser" text="Login" />
-      <ChoiceBox fx:id="entity" layoutX="136.0" layoutY="170.0" prefWidth="150.0" />
-      <Label layoutX="65.0" layoutY="182.0" text="Entity" />
-      <Button layoutX="350.0" layoutY="358.0" mnemonicParsing="false" onAction="#openSignUp" text="SignUp" />
-      <TextField fx:id="identity" layoutX="136.0" layoutY="63.0" />
-      <Label layoutX="65.0" layoutY="122.0" text="Password" />
-      <Label layoutX="65.0" layoutY="67.0" text="Identity" />
-      <TextField fx:id="password" layoutX="136.0" layoutY="118.0" />
-      <CheckBox layoutX="305.0" layoutY="174.0" mnemonicParsing="false" onAction="#populateEntity" text="Populate Entity" />
-      <Label fx:id="error" layoutX="189.0" layoutY="241.0" text="Label" />
-      <CheckBox layoutX="29.0" layoutY="375.0" mnemonicParsing="false" onAction="#Init" />
+      <ImageView fitHeight="453.0" fitWidth="455.0" layoutY="-3.0" opacity="0.33" pickOnBounds="true">
+         <image>
+            <Image url="@../../cafe3.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="214.0" layoutY="311.0" mnemonicParsing="false" onAction="#loginUser" text="Login" />
+      <ChoiceBox fx:id="entity" layoutX="161.0" layoutY="225.0" prefWidth="150.0" />
+      <Label layoutX="108.0" layoutY="229.0" text="Entity" />
+      <Button layoutX="210.0" layoutY="343.0" mnemonicParsing="false" onAction="#openSignUp" text="SignUp" />
+      <TextField fx:id="identity" layoutX="162.0" layoutY="136.0" />
+      <Label layoutX="98.0" layoutY="183.0" text="Password" />
+      <Label layoutX="102.0" layoutY="140.0" text="Identity" />
+      <TextField fx:id="password" layoutX="162.0" layoutY="179.0" />
+      <CheckBox layoutX="324.0" layoutY="229.0" mnemonicParsing="false" onAction="#populateEntity" text="Populate Entity" />
+      <Label fx:id="error" layoutX="271.0" layoutY="191.0" prefHeight="17.0" prefWidth="166.0" />
+      <CheckBox layoutX="14.0" layoutY="405.0" mnemonicParsing="false" onAction="#Init" />
    </children>
 </AnchorPane>

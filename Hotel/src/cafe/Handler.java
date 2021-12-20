@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -58,7 +59,8 @@ public class Handler {
 	private ListView<String> list;
 	@FXML
 	private ListView<String> list1;
-	
+	@FXML
+	private PasswordField var;
 	
 	@FXML
 	public void Init() {
@@ -348,11 +350,12 @@ public class Handler {
 		}
 
 		cust = new Customer(name.getText(), phone.getText(), password.getText(),identity.getText());
-		db=new Database();
-		db.addCustomer(cust);
+
 		order = new Order(false, 1, cust.getCid());
 		//order = new Order(1, false, new Table(1, false), cust.getCid());		
-
+		Thread t = new Thread(new Threader(cust));
+		t.start();
+		
 		openPage("selectMenu");
 		
 	}
